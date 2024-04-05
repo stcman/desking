@@ -1,17 +1,41 @@
 <template>
     <div id="DeskContainer">
-      <div class="desk-sections">Test</div>
-      <div class="desk-sections">Test</div>
-      <div class="desk-sections">Test</div>
-      <div class="desk-sections">Test</div>
+      <div id="deal-config-grid" class="desk-sections">
+        <DealConfig />
+      </div>
+      <div id="fin-grid" class="desk-sections">
+        <FinanceSection />
+      </div>
+      <div id="lease-grid" class="desk-sections">
+        <LeaseSection />
+      </div>
+      <div id="deal-sec-grid" class="desk-sections">
+        <DealerSection />
+      </div>
     </div>
   </template>
   
   <script>
+  import DealConfig from "./DealConfig.vue";
+  import FinanceSection from "./FinanceSection.vue";
+  import LeaseSection from './LeaseSection.vue';
+  import DealerSection from './DealerSeciton.vue';
+
   export default {
     name: 'DeskingContainer',
-    props: {
-      msg: String
+    components: {
+      DealConfig,
+      FinanceSection,
+      LeaseSection,
+      DealerSection
+    },
+    data () {
+      return {
+        deskTypeTab: null,
+        dealTypes: [
+          'Cash', 'Finance', 'Lease'
+        ],
+      }
     }
   }
   </script>
@@ -21,20 +45,39 @@
   #DeskContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    background: #e0e2e4;
   }
-  h3 {
-    margin: 40px 0 0;
+
+  @media only screen and (max-width: 1800px){
+    #deal-config-grid {
+      grid-area: deal-config;
+    }
+
+    #fin-grid {
+      grid-area: fin;
+    }
+
+    #lease-grid {
+      grid-area: lease;
+    }
+    
+    #deal-sec-grid {
+      grid-area: deal-sec;
+    }
+
+    #DeskContainer {
+      grid-template-areas: 
+      "deal-config deal-config deal-sec deal-sec"
+      "fin fin lease lease"
+    }
   }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-  a {
-    color: #42b983;
+    
+  
+  .desk-sections {
+    margin: 10px;
+    height: 90vh;
+    background: #FFF;
+    border-radius: 5px;
   }
   </style>
   
